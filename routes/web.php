@@ -27,7 +27,7 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
     });
     
     
-    Route::group(['prefix'=>'retailer', 'middleware'=>'auth.checkrole:retailer', 'as'=>'retailer.'], function(){
+    Route::group(['prefix'=>'retailer', 'middleware'=>'auth:api', 'as'=>'retailer.'], function(){
         Route::resource('orders',
             'API\Retailer\RetailerOrdersController', [
                 'except' => [
