@@ -11,13 +11,15 @@
 |
 */
 
+use Drinking\Models\OrderItem;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
 
-    Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin', 'as'=>'admin.'], function(){
+    Route::group(['prefix'=>'admin', 'as'=>'admin.'], function(){
         Route::resource('categories',
             'API\Admin\AdminCategoriesController',
                 ['except'=>[
@@ -40,8 +42,37 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
             'as'=> 'orders.update_status'
         ]);
     });
+    
+    Route::group(['prefix'=>'customer', 'middleware'=>'auth:api', 'as'=>'customer.'], function(){
+        Route::resource('orders',
+            'API\Customer\CustomerOrdersController', [
+                'except' => [
+                    'create','edit','update','destroy'
+                ]
+            ]);
+        
+        Route::patch('/order/{orderId}/cancel_order', 'API\Customer\CustomerOrdersController@cancelOrder');
+    });
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+
+
+//Route::get('/getdeadlinetocancelorderdt/{orderid}', 'API\Customer\CustomerOrdersController@getDeadLineToCancelOrderDT');
+Route::get('/remainingtimetocancelorderdt/{orderid}', 'API\Customer\CustomerOrdersController@getRemainingTimeToCancelOrderDT');
+
+
+
+//Provavelmente deletar
+//Route::group(['prefix'=>'apitester','as'=>'apitester'], function(){
+//    Route::group(['prefix'=>'customer', 'as'=>'customer.'], function(){
+//        $http = new GuzzleHttp\Client;
+//
+//        factory(OrderItem::class, 2)->create()->each(function($orderItem){
+//            $orderItem->save();
+//        });
+//    });
+//});

@@ -66,7 +66,7 @@ class RetailerOrdersController extends Controller
 
         if($order->retailer_id == $retailerId)
         {
-            $order = $this->orderService->updateStatus($orderId, $retailerId, $request->get('status'));
+            $order = $this->orderService->updateStatus($orderId, $request->get('status'));
 
             return $order;
         }
