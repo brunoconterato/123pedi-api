@@ -4,20 +4,22 @@ namespace Drinking\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Drinking\Repositories\ProductRepository;
-use Drinking\Models\Product;
-use Drinking\Validators\ProductValidator;
+use Drinking\Repositories\OAuthClientRepository;
+use Drinking\Models\OAuthClient;
+use Drinking\Validators\OAuthClientValidator;
 
 /**
- * Class ProductRepositoryEloquent
+ * Class OAuthClientRepositoryEloquent
  * @package namespace Drinking\Repositories;
  */
-class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
+class OAuthClientRepositoryEloquent extends BaseRepository implements OAuthClientRepository
 {
+    public function getByEmail($email){
+        $result = $this->findWhere(['email' => $email]);
 
-    public function pluck()
-    {
-        return $this->model->get(['id', 'name', 'manufacturer', 'brand']);
+        $result = $result->first();
+
+        return $result;
     }
 
     /**
@@ -27,7 +29,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
      */
     public function model()
     {
-        return Product::class;
+        return OAuthClient::class;
     }
 
     

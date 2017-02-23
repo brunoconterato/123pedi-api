@@ -14,6 +14,14 @@ use Drinking\Validators\UserValidator;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+    public function getByEmail($email){
+        $result = $this->findWhere(['email' => $email]);
+
+        $result = $result->first();
+
+        return $result;
+    }
+
     /**
      * Specify Model class name
      *

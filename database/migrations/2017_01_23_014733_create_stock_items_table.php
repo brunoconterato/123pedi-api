@@ -20,7 +20,7 @@ class CreateStockItemsTable extends Migration
 			$table->foreign('product_id')->references('id')->on('products');
 
 			$table->integer('retailer_id')->unsigned();
-			$table->foreign('retailer_id')->references('id')->on('petshops');
+			$table->foreign('retailer_id')->references('id')->on('retailer');
 
 			$table->integer('quantity');
 			$table->date('expiration_date');

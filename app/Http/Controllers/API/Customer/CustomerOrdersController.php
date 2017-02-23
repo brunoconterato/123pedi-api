@@ -75,8 +75,6 @@ class CustomerOrdersController extends Controller
     {
         $data = $request->all();
 
-        //dd($data);
-
         $clientId = $this->userRepository->find(Auth::user()->id)->client->id;
 
         $data['client_id'] = $clientId;

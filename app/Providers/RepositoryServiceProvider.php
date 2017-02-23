@@ -57,5 +57,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Drinking\Repositories\StockItemRepository',
             'Drinking\Repositories\StockItemRepositoryEloquent'
         );
+
+        $this->app->bind(
+            'Drinking\Repositories\OAuthClientRepository',
+            'Drinking\Repositories\OAuthClientRepositoryEloquent'
+        );
     }
 }

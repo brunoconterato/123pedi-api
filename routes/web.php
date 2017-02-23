@@ -11,7 +11,9 @@
 |
 */
 
-use Drinking\Models\OrderItem;
+use Drinking\Models\OAuthClient;
+use Drinking\Models\User;
+use GuzzleHttp\Client;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,24 +57,31 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
     });
 });
 
+Route::group(['prefix'=>'retailer', 'middleware'=>'auth', 'as'=>'retailer.'], function(){
+    Route::get('order', ['as'=>'order.index', 'uses'=> 'RetailerOrdersController@index']);
+    Route::get('order/vieworder/{id}', ['as'=>'order.vieworder', 'uses'=> 'RetailerOrdersController@viewOrder']);
+    Route::post('order/update/{id}', ['as'=>'order.update', 'uses'=> 'RetailerOrdersController@update']);
+
+    Route::get('stock/index', ['as'=>'stock.index', 'uses'=> 'Retailer\StockController@index']);
+    Route::get('stock/create', ['as'=>'stock.create', 'uses'=> 'Retailer\StockController@create']);
+    Route::post('stock/store', ['as'=>'stock.store','uses'=>'Retailer\StockController@store']);
+    Route::get('stock/edit/{id}', ['as'=>'stock.edit', 'uses'=> 'Retailer\StockController@edit']);
+    Route::post('stock/update/{id}', ['as'=>'stock.update','uses'=>'Retailer\StockController@update']);
+    Route::get('stock/destroy/{id}', ['as'=>'stock.destroy', 'uses'=>'Retailer\StockController@destroy']);
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-
-
 //Route::get('/getdeadlinetocancelorderdt/{orderid}', 'API\Customer\CustomerOrdersController@getDeadLineToCancelOrderDT');
 Route::get('/remainingtimetocancelorderdt/{orderid}', 'API\Customer\CustomerOrdersController@getRemainingTimeToCancelOrderDT');
 
+//Route para registrar usuários de clientes da API (password grant type)
+//TODO: Make transaction into database
+//TODO: Modificar a rota /register-user para cliar novo client inclusive, não somente user
+//TODO: Configurar para verificar se o cliente já existe, se já existir não precisa fazer muita coisa que tá a
+Route::post('/register-user', 'API\Customer\AuthenticationController@registerUser');
+Route::post('/gettoken', 'API\Customer\AuthenticationController@getToken');
 
 
-//Provavelmente deletar
-//Route::group(['prefix'=>'apitester','as'=>'apitester'], function(){
-//    Route::group(['prefix'=>'customer', 'as'=>'customer.'], function(){
-//        $http = new GuzzleHttp\Client;
-//
-//        factory(OrderItem::class, 2)->create()->each(function($orderItem){
-//            $orderItem->save();
-//        });
-//    });
-//});
