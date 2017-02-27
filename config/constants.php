@@ -20,7 +20,8 @@ return [
     */
 
     'base_client_uri' => env('BASE_CLIENT_URI','http://localhost:9001'),
-    'base_server_uri' => env('BASE_SERVER_URI','http://localhost:8000'),
+    'base_server_uri' => env('BASE_SERVER_URI','http://happy-hour.beer'),
+//    'base_server_uri' => env('BASE_SERVER_URI','http://localhost:8000'),
 
     'minutes_for_user_cancel_order' => env('MINUTES_FOR_USER_CANCEL_ORDER','5'),
 

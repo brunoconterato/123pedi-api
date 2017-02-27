@@ -50,7 +50,7 @@ class CustomerOrdersController extends Controller
     //Funciona
     public function index()
     {
-        $clientId = $this->userRepository->find(Auth::user()->id)->client->id;
+        //$clientId = $this->userRepository->find(Auth::user()->id)->client->id;
 
 //        $orders = $this->orderRepository->with(['items'])->scopeQuery(function($query) use($clientId){
 //            return $query->where('client_id','=',$clientId);
