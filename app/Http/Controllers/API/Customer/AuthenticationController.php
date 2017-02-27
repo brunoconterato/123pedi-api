@@ -88,18 +88,4 @@ class AuthenticationController extends Controller
 
         return $acessToken;
     }
-
-    public function getToken(Request $request){
-        $email = $request['email'];
-        $password = $request['password'];
-
-        //TODO: verificar se o email é registrado
-
-
-        $user = $this->userRepository->getByEmail($email);
-        $oauth_client = $this->oAuthClientRepository->find($email);
-
-        dd('$oauth_client: '.$oauth_client);
-
-    }
 }

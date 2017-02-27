@@ -54,6 +54,8 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
             ]);
         
         Route::patch('/order/{orderId}/cancel_order', 'API\Customer\CustomerOrdersController@cancelOrder');
+
+        Route::get('stocksearch', 'API\Customer\StockSearchController@index');
     });
 });
 
@@ -82,6 +84,5 @@ Route::get('/remainingtimetocancelorderdt/{orderid}', 'API\Customer\CustomerOrde
 //TODO: Modificar a rota /register-user para cliar novo client inclusive, não somente user
 //TODO: Configurar para verificar se o cliente já existe, se já existir não precisa fazer muita coisa que tá a
 Route::post('/register-user', 'API\Customer\AuthenticationController@registerUser');
-Route::post('/gettoken', 'API\Customer\AuthenticationController@getToken');
 
 

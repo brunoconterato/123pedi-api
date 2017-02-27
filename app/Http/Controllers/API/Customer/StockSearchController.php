@@ -19,11 +19,15 @@ class StockSearchController extends Controller
     }
     
     public function index(){
-        $stockItems = $this->stockItemRepository->where('retailer_id','=',1);
+//        $stockItems = $this->stockItemRepository->where('retailer_id','=',1);
+
+        $retailerId = 1;
+        $stockItems = $this->stockItemRepository->with(['retailer'])->scopeQuery(function($query) use($retailerId){
+            return $query->where('retailer_id','=',$retailerId);
+        })->paginate();
 
         //TODO: retirar replicações
 
-
-        return $stockItems;
+        return $stockItems->items();
     }
 }
