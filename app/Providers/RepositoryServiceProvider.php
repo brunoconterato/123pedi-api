@@ -62,5 +62,15 @@ class RepositoryServiceProvider extends ServiceProvider
             'Drinking\Repositories\OAuthClientRepository',
             'Drinking\Repositories\OAuthClientRepositoryEloquent'
         );
+
+        $this->app->bind(
+            'Drinking\Repositories\UnregisteredOrderRepository',
+            'Drinking\Repositories\UnregisteredOrderRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'Drinking\Repositories\UnregisteredOrderItemRepository',
+            'Drinking\Repositories\UnregisteredOrderItemRepositoryEloquent'
+        );
     }
 }

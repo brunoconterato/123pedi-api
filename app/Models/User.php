@@ -45,7 +45,7 @@ class User extends Model implements Transformable,
     }
 
     public function retailer(){
-        #return $this->hasOne(Retailer::class, 'id', 'id');
+        #return $this->hasOne(retailer::class, 'id', 'id');
         return $this->hasOne(Retailer::class);
     }
 

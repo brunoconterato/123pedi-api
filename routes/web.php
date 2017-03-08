@@ -57,6 +57,17 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
 
         Route::get('stocksearch', 'API\Customer\StockSearchController@index');
     });
+
+    Route::group(['prefix'=>'unregistered', 'as'=>'unregistered.'], function(){
+        Route::resource('orders',
+            'API\Unregistered\UnregisteredCustomerOrdersController', [
+                'except' => [
+                    'index', 'create','edit','update','destroy', 'show'
+                ]
+            ]);
+
+        Route::patch('/order/{orderId}/cancel_order', 'API\Unregistered\UnregisteredCustomerOrdersController@cancelOrder');
+    });
 });
 
 Route::group(['prefix'=>'retailer', 'middleware'=>'auth', 'as'=>'retailer.'], function(){
@@ -64,12 +75,12 @@ Route::group(['prefix'=>'retailer', 'middleware'=>'auth', 'as'=>'retailer.'], fu
     Route::get('order/vieworder/{id}', ['as'=>'order.vieworder', 'uses'=> 'RetailerOrdersController@viewOrder']);
     Route::post('order/update/{id}', ['as'=>'order.update', 'uses'=> 'RetailerOrdersController@update']);
 
-    Route::get('stock/index', ['as'=>'stock.index', 'uses'=> 'Retailer\StockController@index']);
-    Route::get('stock/create', ['as'=>'stock.create', 'uses'=> 'Retailer\StockController@create']);
-    Route::post('stock/store', ['as'=>'stock.store','uses'=>'Retailer\StockController@store']);
-    Route::get('stock/edit/{id}', ['as'=>'stock.edit', 'uses'=> 'Retailer\StockController@edit']);
-    Route::post('stock/update/{id}', ['as'=>'stock.update','uses'=>'Retailer\StockController@update']);
-    Route::get('stock/destroy/{id}', ['as'=>'stock.destroy', 'uses'=>'Retailer\StockController@destroy']);
+    Route::get('stock/index', ['as'=>'stock.index', 'uses'=> 'retailer\StockController@index']);
+    Route::get('stock/create', ['as'=>'stock.create', 'uses'=> 'retailer\StockController@create']);
+    Route::post('stock/store', ['as'=>'stock.store','uses'=>'retailer\StockController@store']);
+    Route::get('stock/edit/{id}', ['as'=>'stock.edit', 'uses'=> 'retailer\StockController@edit']);
+    Route::post('stock/update/{id}', ['as'=>'stock.update','uses'=>'retailer\StockController@update']);
+    Route::get('stock/destroy/{id}', ['as'=>'stock.destroy', 'uses'=>'retailer\StockController@destroy']);
 });
 
 Auth::routes();

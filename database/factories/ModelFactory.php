@@ -19,6 +19,8 @@ use Drinking\Models\OrderItem;
 use Drinking\Models\Product;
 use Drinking\Models\Retailer;
 use Drinking\Models\StockItem;
+use Drinking\Models\UnregisteredOrder;
+use Drinking\Models\UnregisteredOrderItem;
 use Drinking\Models\User;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
@@ -45,8 +47,8 @@ $factory->define(Client::class, function(Faker\Generator $faker) {
 $factory->define(Retailer::class, function (Faker\Generator $faker) {
     return [
         'cnpj' => $faker->numberBetween(1000000,999999999),
-        'phone' =>$faker->phoneNumber,
-        'address' =>$faker->address,
+        'phone' => $faker->phoneNumber,
+        'address' => $faker->address,
         'city' =>$faker->city,
         'state' => $faker->state,
         'zipcode' => $faker->postcode
@@ -104,5 +106,33 @@ $factory->define(StockItem::class, function(Faker\Generator $faker) {
        'expiration_date' => $faker->dateTimeBetween($start_date,$end_date),
    ];
 });
+
+$factory->define(UnregisteredOrder::class, function(Faker\Generator $faker){
+    return [
+        'retailer_id' => random_int(1,10),
+        'total' => rand(0.01,100.00),
+        'status' => 'Pendente',
+
+        'name' => $faker->name,
+        'phone' => $faker->phoneNumber,
+        'street_adress' => $faker->address,
+        'adress_line_2' => random_int(1,1000),
+        'neighborhood' => $faker->word,
+        'city' => $faker->city,
+        'state' => $faker->state,
+        'zipcode' => $faker->postcode,
+        'email' => $faker->email,
+        'lat_coordinate' => $faker->latitude,
+        'long_coordinate' => $faker->longitude,
+    ];
+});
+
+$factory->define(UnregisteredOrderItem::class, function(Faker\Generator $faker){
+    return [
+        'quantity' => random_int(1,10),
+        'unregistered_order_id' => random_int(1,50),
+    ];
+});
+
 
 

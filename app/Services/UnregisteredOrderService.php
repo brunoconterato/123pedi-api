@@ -8,18 +8,18 @@
 
 namespace Drinking\Services;
 
-
-use Drinking\Models\Order;
-use Drinking\Repositories\OrderItemRepositoryEloquent;
-use Drinking\Repositories\OrderRepositoryEloquent;
+use Drinking\Models\UnregisteredOrder;
 use Drinking\Repositories\StockItemRepositoryEloquent;
 
+use Drinking\Repositories\UnregisteredOrderItemRepositoryEloquent;
+use Drinking\Repositories\UnregisteredOrderRepositoryEloquent;
 use Illuminate\Http\Request;
 
-class OrderService
+//TODO: fazer toda a implementação desta classe
+class UnregisteredOrderService
 {
     /**
-     * @var OrderRepositoryEloquent
+     * @var UnregisteredOrderRepositoryEloquent
      */
     private $orderRepository;
     /**
@@ -27,16 +27,15 @@ class OrderService
      */
     private $stockItemRepository;
     /**
-     * @var OrderItemRepositoryEloquent
+     * @var UnregisteredOrderItemRepositoryEloquent
      */
     private $orderItemRepository;
 
     public function __construct(
-        OrderRepositoryEloquent $orderRepository,
-        OrderItemRepositoryEloquent $orderItemRepository,
+        UnregisteredOrderRepositoryEloquent $orderRepository,
+        UnregisteredOrderItemRepositoryEloquent $orderItemRepository,
         StockItemRepositoryEloquent $stockItemRepository)
     {
-
         $this->orderRepository = $orderRepository;
         $this->stockItemRepository = $stockItemRepository;
         $this->orderItemRepository = $orderItemRepository;
@@ -46,8 +45,9 @@ class OrderService
     //Isso ocorre pq o estabelecimento não pode querer vender mais do que possui em estoque
     public function create(array $data, Request $request){
         \DB::beginTransaction();
-
         try{
+            $dataOrder = $data;
+
             $itensQuantity = sizeof($data['stockitems_id']);
 
             $total = 0;
@@ -74,16 +74,14 @@ class OrderService
             $dataOrder['status'] = 'Pendente';
             $dataOrder['total'] = $total;
             $dataOrder['retailer_id'] = $data['retailer_id'];
-            $dataOrder['client_id'] = $data['client_id'];
 
             $order = $this->orderRepository->create($dataOrder);
 
             $order->save();
 
-
             //Inserindo orderItems criados na database
             for ($i = 0; $i < $itensQuantity; $i++) {
-                $orderItemsData[$i]['order_id'] = $order->id;
+                $orderItemsData[$i]['unregistered_order_id'] = $order->id;
                 $this->orderItemRepository->create($orderItemsData[$i]);
             }
 
@@ -103,14 +101,14 @@ class OrderService
     public function updateStatus($orderId, $newStatus)
     {
         \DB::beginTransaction();
-        
+
         try {
             $order = $this->orderRepository->find($orderId);
 
             if(strtolower($order->status) != 'cancelada') {
                 $availableStatusLowerCase = ['Pendente', 'A caminho', 'Entregue', 'Cancelada'];
 
-                if ($order instanceof Order) {
+                if ($order instanceof UnregisteredOrder) {
                     if(in_array($newStatus, $availableStatusLowerCase)){
                         $order->status = $newStatus;
                         $order->save();
@@ -119,17 +117,6 @@ class OrderService
                     else{
                         return null;
                     }
-
-//                        Deleção?
-//                    foreach ($availableStatusLowerCase as $status) {
-//                        if ($newStatus == $status) {
-//                            $order->status = $newStatus;
-//                            $order->save();
-//                            return $order;
-//                        }
-//                    }
-
-
                 }
                 else{
                     return null;

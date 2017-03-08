@@ -22,7 +22,7 @@ class StockSearchController extends Controller
 //        $stockItems = $this->stockItemRepository->where('retailer_id','=',1);
 
         $retailerId = 1;
-        $stockItems = $this->stockItemRepository->with(['retailer'])->scopeQuery(function($query) use($retailerId){
+        $stockItems = $this->stockItemRepository->with(['retailer','product'])->scopeQuery(function($query) use($retailerId){
             return $query->where('retailer_id','=',$retailerId);
         })->paginate();
 
