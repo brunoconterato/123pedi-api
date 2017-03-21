@@ -11,10 +11,6 @@
 |
 */
 
-use Drinking\Models\OAuthClient;
-use Drinking\Models\User;
-use GuzzleHttp\Client;
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -54,8 +50,6 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
             ]);
         
         Route::patch('/order/{orderId}/cancel_order', 'API\Customer\CustomerOrdersController@cancelOrder');
-
-        Route::get('stocksearch', 'API\Customer\StockSearchController@index');
     });
 
     Route::group(['prefix'=>'unregistered', 'as'=>'unregistered.'], function(){
@@ -67,6 +61,10 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
             ]);
 
         Route::patch('/order/{orderId}/cancel_order', 'API\Unregistered\UnregisteredCustomerOrdersController@cancelOrder');
+    });
+
+    Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
+        Route::get('stocksearch', 'API\Search\StockSearchController@index');
     });
 });
 

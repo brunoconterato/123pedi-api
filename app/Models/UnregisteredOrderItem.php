@@ -12,7 +12,8 @@ class UnregisteredOrderItem extends Model implements Transformable
 
     protected $fillable = [
         'quantity',
-        'unregistered_order_id'
+        'unregistered_order_id',
+        'stock_item_id'
     ];
 
     public function stockItem()

@@ -1,7 +1,6 @@
 <?php
 
 use Drinking\Models\Category;
-use Drinking\Models\Product;
 use Illuminate\Database\Seeder;
 
 class CategoryTableSeeder extends Seeder
@@ -13,10 +12,20 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Category::class, 10)->create()->each(function($c){
-            for($i=0; $i<=5; $i++){
-                $c->products()->save(factory(Product::class)->make());
-            }
-        });
+        factory(Category::class)->create([
+            'name' => 'alcoolicos',
+        ]);
+
+        factory(Category::class)->create([
+            'name' => 'nao_alcoolicos',
+        ]);
+
+        factory(Category::class)->create([
+            'name' => 'cigarros',
+        ]);
+
+        factory(Category::class)->create([
+            'name' => 'outros',
+        ]);
     }
 }

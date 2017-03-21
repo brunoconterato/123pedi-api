@@ -58,7 +58,7 @@ $factory->define(Retailer::class, function (Faker\Generator $faker) {
 $factory->define(Order::class, function(Faker\Generator $faker){
    return [
        'client_id' => random_int(1,10),
-       'retailer_id' => random_int(1,10),
+       'retailer_id' => 1,
        'total' => rand(0.01,100.00),
        'status' => 'Pendente',
    ];
@@ -66,8 +66,8 @@ $factory->define(Order::class, function(Faker\Generator $faker){
 
 $factory->define(OrderItem::class, function(Faker\Generator $faker){
     return [
-        'stockItem_id' => random_int(1,100),
-        'order_id' => random_int(1,100),
+        'stockItem_id' => random_int(1, 200),
+        'order_id' => random_int(1, 500),
         'price' => rand(1,10),
         'quantity' => random_int(1,10),
     ];
@@ -75,7 +75,7 @@ $factory->define(OrderItem::class, function(Faker\Generator $faker){
 
 $factory->define(Product::class, function(Faker\Generator $faker){
     return [
-        'category_id' => random_int(1,10),
+        'category_id' => random_int(1, 4),
         'name' =>$faker->word,
         'description' => $faker->text(200),
         'manufacturer' => $faker->name,
@@ -84,8 +84,15 @@ $factory->define(Product::class, function(Faker\Generator $faker){
 });
 
 $factory->define(Category::class, function(Faker\Generator $faker) {
+    $availableCategories = [
+        'alcoolicos' => 'alcoolicos',
+        'nao_aloolicos' => 'nao_aloolicos',
+        'cigarros' => 'cigarros',
+        'outros' => 'outros'
+    ];
+
     return [
-        'name' => $faker->word,
+        'name' => $availableCategories[array_rand($availableCategories)]
     ];
 });
 
@@ -97,8 +104,8 @@ $factory->define(StockItem::class, function(Faker\Generator $faker) {
     $end_date = date('d-m-Y',1514764799);
 
     return [
-       'product_id' => random_int(1,25),
-       'retailer_id' => random_int(1,10),
+        'product_id' => random_int(1, 200),
+        'retailer_id' => 1,
        'quantity' => random_int(1,10),
        'price' => $price,
        'min_selling_price' => $min_selling_price,
@@ -109,7 +116,7 @@ $factory->define(StockItem::class, function(Faker\Generator $faker) {
 
 $factory->define(UnregisteredOrder::class, function(Faker\Generator $faker){
     return [
-        'retailer_id' => random_int(1,10),
+        'retailer_id' => 1,
         'total' => rand(0.01,100.00),
         'status' => 'Pendente',
 
@@ -130,7 +137,8 @@ $factory->define(UnregisteredOrder::class, function(Faker\Generator $faker){
 $factory->define(UnregisteredOrderItem::class, function(Faker\Generator $faker){
     return [
         'quantity' => random_int(1,10),
-        'unregistered_order_id' => random_int(1,50),
+        'unregistered_order_id' => random_int(1, 2000),
+        'stockItem_id' => random_int(1, 200)
     ];
 });
 

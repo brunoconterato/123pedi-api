@@ -56,21 +56,21 @@ class UserTableSeeder extends Seeder
 
         print "\nCriou retailer";
 
-        factory(User::class)->create([
-            'name' => 'retailer2',
-            'role' => 'retailer',
-            'email' => 'retailer2@user.com',
-            'password' => bcrypt(789456),
-            'remember_token' => str_random(10),
-        ])->retailer()->save(factory(Retailer::class)->make());
-
-        print "\nCriou retailer2";
-
-        factory(User::class, 10)->create([
-            'role'=>'retailer'
-        ])->each(function($u){
-            $u->retailer()->save(factory(Retailer::class)->make());
-        });
+//        factory(User::class)->create([
+//            'name' => 'retailer2',
+//            'role' => 'retailer',
+//            'email' => 'retailer2@user.com',
+//            'password' => bcrypt(789456),
+//            'remember_token' => str_random(10),
+//        ])->retailer()->save(factory(Retailer::class)->make());
+//
+//        print "\nCriou retailer2";
+//
+//        factory(User::class, 1)->create([
+//            'role'=>'retailer'
+//        ])->each(function($u){
+//            $u->retailer()->save(factory(Retailer::class)->make());
+//        });
 
         factory(User::class, 10) ->create([
             'role'=>'client'
