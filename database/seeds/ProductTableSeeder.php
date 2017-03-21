@@ -1,5 +1,7 @@
 <?php
 
+use Drinking\Models\Product;
+use Drinking\Models\StockItem;
 use Illuminate\Database\Seeder;
 
 class ProductTableSeeder extends Seeder
@@ -11,6 +13,9 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
-        
+        factory(Product::class, 200)->create()->each(function ($p) {
+            //criando 1 stockItem para cada product
+            $p->stockItem()->save(factory(StockItem::class)->make());
+        });
     }
 }

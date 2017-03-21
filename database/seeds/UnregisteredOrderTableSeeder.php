@@ -1,7 +1,5 @@
 <?php
 
-use Drinking\Models\Order;
-use Drinking\Models\OrderItem;
 use Drinking\Models\UnregisteredOrder;
 use Drinking\Models\UnregisteredOrderItem;
 use Illuminate\Database\Seeder;
@@ -15,7 +13,7 @@ class UnregisteredOrderTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(UnregisteredOrder::class, 50)->create()->each(function($o){
+        factory(UnregisteredOrder::class, 500)->create()->each(function ($o) {
             //Criando itens para order
             //Cada order 4 itens
             for($i=0; $i<=4; $i++){

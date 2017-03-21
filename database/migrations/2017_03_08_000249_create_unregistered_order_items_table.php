@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateUnregisteredOrderItemsTable extends Migration
 {
@@ -16,8 +16,13 @@ class CreateUnregisteredOrderItemsTable extends Migration
 		Schema::create('unregistered_order_items', function(Blueprint $table) {
             $table->increments('id');
 
-			$table->integer('quantity');
-			$table->integer('unregistered_order_id');
+			$table->smallInteger('quantity');
+
+			$table->integer('stockItem_id')->unsigned();
+			$table->foreign('stockItem_id')->references('id')->on('stock_items');
+
+			$table->integer('unregistered_order_id')->unsigned();
+			$table->foreign('unregistered_order_id')->references('id')->on('unregistered_orders');
 
             $table->timestamps();
 		});
