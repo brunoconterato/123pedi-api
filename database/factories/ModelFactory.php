@@ -138,7 +138,7 @@ $factory->define(UnregisteredOrderItem::class, function(Faker\Generator $faker){
     return [
         'quantity' => random_int(1,10),
         'unregistered_order_id' => random_int(1, 2000),
-        'stockItem_id' => random_int(1, 200)
+        'stock_item_id' => random_int(1, 200)
     ];
 });
 

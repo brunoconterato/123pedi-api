@@ -18,8 +18,8 @@ class CreateUnregisteredOrderItemsTable extends Migration
 
 			$table->smallInteger('quantity');
 
-			$table->integer('stockItem_id')->unsigned();
-			$table->foreign('stockItem_id')->references('id')->on('stock_items');
+			$table->integer('stock_item_id')->unsigned();
+			$table->foreign('stock_item_id')->references('id')->on('stock_items');
 
 			$table->integer('unregistered_order_id')->unsigned();
 			$table->foreign('unregistered_order_id')->references('id')->on('unregistered_orders');

@@ -55,10 +55,10 @@ class UnregisteredOrderService
             //criando orderItems
             for ($i = 0; $i < $itensQuantity; $i++)
             {
-                $orderItemsData[$i]['stockItem_id'] = $data['stockitems_id'][$i];
+                $orderItemsData[$i]['stock_item_id'] = $data['stockitems_id'][$i];
                 $orderItemsData[$i]['quantity'] = $data['stockitems_quantity'][$i];
 
-                $stockItemId = $orderItemsData[$i]['stockItem_id'];
+                $stockItemId = $orderItemsData[$i]['stock_item_id'];
                 $stockItems[$i] = $this->stockItemRepository->find($stockItemId);
                 $orderItemsData[$i]['price'] = $stockItems[$i]->price;
 
