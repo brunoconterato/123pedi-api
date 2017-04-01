@@ -14,6 +14,11 @@ use Drinking\Validators\RetailerValidator;
  */
 class RetailerRepositoryEloquent extends BaseRepository implements RetailerRepository
 {
+    public function pluck()
+    {
+        return $this->model->get(['id', 'user_id']);
+    }
+
     /**
      * Specify Model class name
      *

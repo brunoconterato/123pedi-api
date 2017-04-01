@@ -13,6 +13,11 @@ use Drinking\Validators\CategoryValidator;
  */
 class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
 {
+    public function pluck()
+    {
+        return $this->model->pluck('name','id');
+    }
+    
     /**
      * Specify Model class name
      *

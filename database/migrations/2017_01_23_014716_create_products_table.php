@@ -24,6 +24,8 @@ class CreateProductsTable extends Migration
 			$table->string('manufacturer');
 			$table->string('brand');
 
+			$table->string('image_url')->default('');
+
 			$table->timestamps();
 		});
 	}

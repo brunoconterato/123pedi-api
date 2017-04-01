@@ -11,7 +11,7 @@ class OrderItem extends Model implements Transformable
     use TransformableTrait;
 
     protected $fillable = [
-        'stockItem_id',
+        'stock_item_id',
         'order_id',
         //TODO: retirar o price, que virá do stockItem
         'price',
@@ -21,10 +21,5 @@ class OrderItem extends Model implements Transformable
     public function stockItem()
     {
         return $this->belongsTo(StockItem::class);
-    }
-
-    //TODO: Corrigir: cada order item eh um produto
-    public function product(){
-        return $this->hasMany(Product::class);
     }
 }

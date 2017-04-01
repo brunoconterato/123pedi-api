@@ -15,7 +15,7 @@ class ProductTableSeeder extends Seeder
     {
         factory(Product::class, 200)->create()->each(function ($p) {
             //criando 1 stockItem para cada product
-            $p->stockItem()->save(factory(StockItem::class)->make());
+            $p->stockItems()->save(factory(StockItem::class)->make());
         });
     }
 }
