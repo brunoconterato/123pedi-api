@@ -24,7 +24,8 @@ class Order extends Model implements Transformable
 
     public function retailer()
     {
-        return $this->belongsTo(Retailer::class, 'petshop_id', 'id');
+        return $this->belongsTo(Retailer::class, 'retailer_id');
+//        return $this->belongsTo(Retailer::class, 'retailer_id', 'id');
     }
 
     public function client()

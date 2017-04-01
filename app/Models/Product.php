@@ -16,15 +16,21 @@ class Product extends Model implements Transformable
         'name',
         'description',
         'manufacturer',
-        'brand'
+        'brand',
+        'image_url'
     ];
 
     public function category(){
         return $this->belongsTo(Category::class);
     }
 
-    public function stockItem()
+    public function stockItems()
     {
         return $this->hasMany(StockItem::class);
+    }
+
+    public function orderItem()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

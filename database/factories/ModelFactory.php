@@ -66,7 +66,7 @@ $factory->define(Order::class, function(Faker\Generator $faker){
 
 $factory->define(OrderItem::class, function(Faker\Generator $faker){
     return [
-        'stockItem_id' => random_int(1, 200),
+        'stock_item_id' => random_int(1, 200),
         'order_id' => random_int(1, 500),
         'price' => rand(1,10),
         'quantity' => random_int(1,10),
@@ -106,11 +106,11 @@ $factory->define(StockItem::class, function(Faker\Generator $faker) {
     return [
         'product_id' => random_int(1, 200),
         'retailer_id' => 1,
-       'quantity' => random_int(1,10),
-       'price' => $price,
-       'min_selling_price' => $min_selling_price,
-       'cost_price' => $cost_price,
-       'expiration_date' => $faker->dateTimeBetween($start_date,$end_date),
+        'quantity' => random_int(8888,9999),
+        'price' => $price,
+        'min_selling_price' => $min_selling_price,
+        'cost_price' => $cost_price,
+        'expiration_date' => $faker->dateTimeBetween($start_date,$end_date),
    ];
 });
 

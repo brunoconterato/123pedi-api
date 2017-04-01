@@ -94,4 +94,51 @@ Route::get('/remainingtimetocancelorderdt/{orderid}', 'API\Customer\CustomerOrde
 //TODO: Configurar para verificar se o cliente já existe, se já existir não precisa fazer muita coisa que tá a
 Route::post('/register-user', 'API\Customer\AuthenticationController@registerUser');
 
+Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin', 'as'=>'admin.'], function(){
+    Route::get('categories', 'Admin\CategoriesController@index');
+    Route::get('categories/create', ['as'=>'categories.create', 'uses'=>'Admin\CategoriesController@create']);
+    Route::post('categories/store', ['as'=>'categories.store', 'uses'=>'Admin\CategoriesController@store']);
+    Route::get('categories/index', ['as'=>'categories.index', 'uses'=>'Admin\CategoriesController@index']);
+    Route::post('categories/update/{id}', ['as'=>'categories.update', 'uses'=>'Admin\CategoriesController@update']);
+    Route::get('categories/edit/{id}', ['as'=>'categories.edit', 'uses'=>'Admin\CategoriesController@edit']);
 
+    Route::get('clients', 'Admin\ClientsController@index');
+    Route::get('clients/create', ['as'=>'clients.create', 'uses'=>'Admin\ClientsController@create']);
+    Route::post('clients/store', ['as'=>'clients.store', 'uses'=>'Admin\ClientsController@store']);
+    Route::get('clients/index', ['as'=>'clients.index', 'uses'=>'Admin\ClientsController@index']);
+    Route::post('clients/update/{id}', ['as'=>'clients.update', 'uses'=>'Admin\ClientsController@update']);
+    Route::get('clients/edit/{id}', ['as'=>'clients.edit', 'uses'=>'Admin\ClientsController@edit']);
+
+    Route::get('retailers', ['as'=>'retailers', 'uses'=>'Admin\RetailersController@index']);
+    Route::get('retailers/create', ['as'=>'retailers.create', 'uses'=>'Admin\RetailersController@create']);
+    Route::post('retailers/store', ['as'=>'retailers.store', 'uses'=>'Admin\RetailersController@store']);
+    Route::get('retailers/index', ['as'=>'retailers.index', 'uses'=>'Admin\RetailersController@index']);
+    Route::post('retailers/update/{id}', ['as'=>'retailers.update', 'uses'=>'Admin\RetailersController@update']);
+    Route::get('retailers/edit/{id}', ['as'=>'retailers.edit', 'uses'=>'Admin\RetailersController@edit']);
+
+    //Group for admin stock controll over some retailer
+    Route::group(['prefix'=>'retailers/stock', 'middleware'=>'auth.checkrole:admin', 'as'=>'retailers.stock.'], function() {
+        Route::get('index/{retailerId}', ['as' => 'index', 'uses' => 'Admin\RetailersController@stock']);
+        Route::get('create/{retailerId}', ['as'=>'create', 'uses'=>'Admin\RetailersController@createStockItem']);
+        Route::post('store/{retailerId}', ['as'=>'store', 'uses'=>'Admin\RetailersController@storeStockItem']);
+        Route::get('edit/{retailerId}', ['as' => 'edit', 'uses' => 'Admin\RetailersController@editStockItem']);
+        Route::post('update/{retailerId}', ['as'=>'update', 'uses'=>'Admin\RetailersController@updateStockItem']);
+        Route::get('destroy/{retailerId}', ['as' => 'destroy', 'uses' => 'Admin\RetailersController@destroyStockItem']);
+    });
+
+    Route::get('products', 'Admin\ProductsController@index');
+    Route::get('products/create/', ['as'=>'products.create', 'uses'=>'Admin\ProductsController@create']);
+    Route::post('products/store', ['as'=>'products.store', 'uses'=>'Admin\ProductsController@store']);
+    Route::get('products/index', ['as'=>'products.index', 'uses'=>'Admin\ProductsController@index']);
+    Route::post('products/update/{id}', ['as'=>'products.update', 'uses'=>'Admin\ProductsController@update']);
+    Route::get('products/edit/{id}', ['as'=>'products.edit', 'uses'=>'Admin\ProductsController@edit']);
+    Route::get('products/destroy/{id}', ['as'=>'products.destroy', 'uses'=>'Admin\ProductsController@destroy']);
+    Route::get('products/deleteImage/{id}', ['as'=>'products.deleteImage','uses'=>'Admin\ProductsController@deleteImage']);
+
+    Route::get('orders', ['as'=>'orders.index', 'uses'=>'Admin\OrdersController@index']);
+    Route::get('order/create', ['as'=>'orders.create', 'uses'=> 'Admin\OrdersController@create']);
+    Route::post('order/store', ['as'=>'orders.store', 'uses'=> 'Admin\OrdersController@store']);
+    Route::get('orders/{id}', ['as'=>'orders.edit', 'uses'=>'Admin\OrdersController@edit']);
+    Route::post('orders/update/{id}', ['as'=>'orders.update','uses'=>'Admin\OrdersController@update']);
+    Route::get('orders/deleteImage/{id}', ['as'=>'orders.deleteImage','uses'=>'Admin\OrdersController@deleteImage']);
+});

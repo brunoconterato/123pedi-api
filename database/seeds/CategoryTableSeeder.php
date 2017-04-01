@@ -13,19 +13,19 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         factory(Category::class)->create([
-            'name' => 'Alcoólicos',
+            'name' => 'alcoolicos',
         ]);
 
         factory(Category::class)->create([
-            'name' => 'Não Alcoólicos',
+            'name' => 'livres',
         ]);
 
         factory(Category::class)->create([
-            'name' => 'Cigarros',
+            'name' => 'cigarros',
         ]);
 
         factory(Category::class)->create([
-            'name' => 'Outros',
+            'name' => 'outros',
         ]);
     }
 }
