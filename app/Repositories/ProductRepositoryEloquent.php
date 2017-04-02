@@ -2,11 +2,11 @@
 
 namespace Drinking\Repositories;
 
+use Lcobucci\JWT\Signer\Key;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Drinking\Repositories\ProductRepository;
 use Drinking\Models\Product;
-use Drinking\Validators\ProductValidator;
 
 /**
  * Class ProductRepositoryEloquent
@@ -14,10 +14,9 @@ use Drinking\Validators\ProductValidator;
  */
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
 {
-
-    public function pluck()
+    public function pluck($column, $key = null)
     {
-        return $this->model->get(['id', 'name', 'manufacturer', 'brand']);
+        return $this->model->pluck(['id', 'name', 'manufacturer', 'brand']);
     }
 
     /**

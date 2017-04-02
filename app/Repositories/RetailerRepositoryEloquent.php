@@ -14,7 +14,7 @@ use Drinking\Validators\RetailerValidator;
  */
 class RetailerRepositoryEloquent extends BaseRepository implements RetailerRepository
 {
-    public function pluck()
+    public function pluck($column, $key = null)
     {
         return $this->model->get(['id', 'user_id']);
     }

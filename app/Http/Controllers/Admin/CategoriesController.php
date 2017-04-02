@@ -2,8 +2,8 @@
 
 namespace Drinking\Http\Controllers\Admin;
 
-use Drinking\Http\Requests\AdminCategoryRequest;
 use Drinking\Http\Controllers\Controller;
+use Drinking\Http\Requests\Admin\AdminCategoryRequest;
 use Drinking\Repositories\CategoryRepository;
 
 class CategoriesController extends Controller

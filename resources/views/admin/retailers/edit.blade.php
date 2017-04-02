@@ -2,15 +2,15 @@
 
 @section('content')
     <div class="container">
-        <a href="{{ route('retailers') }}" class="btn btn-default btn-small">
+        <a href="{{ route('admin.retailers') }}" class="btn btn-default btn-small">
             Retornar
         </a>
 
-        <h3>Editando Pet Shop: {{$petShop->user->name}}</h3>
+        <h3>Editando Distribuidor: {{$retailer->user->name}}</h3>
 
         @include('errors._check')
 
-        {!! Form::model($petShop, ['route' => ['retailers', $petShop->id]]) !!}
+        {!! Form::model($retailer, ['route' => ['admin.retailers.update', $retailer->id], 'method' => 'POST']) !!}
 
         @include('admin.retailers._form')
 
