@@ -2,23 +2,18 @@
 
 namespace Drinking\Repositories;
 
-use Lcobucci\JWT\Signer\Key;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Drinking\Repositories\ProductRepository;
-use Drinking\Models\Product;
+use Drinking\Repositories\CartItemGetterRepository;
+use Drinking\Models\CartItemGetter;
+use Drinking\Validators\CartItemGetterValidator;
 
 /**
- * Class ProductRepositoryEloquent
+ * Class CartItemGetterRepositoryEloquent
  * @package namespace Drinking\Repositories;
  */
-class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
+class CartItemGetterRepositoryEloquent extends BaseRepository implements CartItemGetterRepository
 {
-    public function pluck($column, $key = null)
-    {
-        return $this->model->get(['id', 'name', 'manufacturer','brand']);
-    }
-
     /**
      * Specify Model class name
      *
@@ -26,7 +21,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
      */
     public function model()
     {
-        return Product::class;
+        return CartItemGetter::class;
     }
 
     

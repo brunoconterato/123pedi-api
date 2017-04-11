@@ -2,19 +2,19 @@
 
 @section('content')
     <div class="container">
-        <a href="{{ route('admin.orders.index') }}" class="btn btn-default btn-small">
+        <a href="{{ route('admin.unregisteredorders.index') }}" class="btn btn-default btn-small">
             Retornar
         </a>
 
         <h3>Pedido # {{$order->id}} - R$ {{$order->total}}</h3>
-        <h4>Cliente: {{$order->client->user->name}}</h4>
+        <h4>Cliente: {{$order->name}}</h4>
         <h4>Data: {{$order->created_at}}</h4>
         <p>
             <b>Entregar em:</b><br>
-            {{$order->client->address}} - {{$order->client->city}} - {{$order->client->state}}
+            {{$order->street_adress}} - {{$order->adress_line_2}} - {{$order->city}} - {{$order->state}}
         </p>
 
-        {!! Form::model($order, ['route' => ['admin.orders.update', $order->id], 'method' => 'POST', 'files'=>true]) !!}
+        {!! Form::model($order, ['route' => ['admin.unregisteredorders.update', $order->id], 'method' => 'POST']) !!}
 
         <div class="form-group">
             {!! Form::label('Status', 'Status:') !!}

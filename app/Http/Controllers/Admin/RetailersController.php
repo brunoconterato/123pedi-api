@@ -72,7 +72,8 @@ class RetailersController extends Controller
 
     public function createStockItem($retailerId)
     {
-        $products = $this->productRepository->pluck();
+        $products = $this->productRepository->pluck(['id', 'name', 'manufacturer', 'brand']);
+
         return view('admin.retailers.stock.create', compact('products', 'retailerId') );
     }
 
@@ -89,7 +90,7 @@ class RetailersController extends Controller
     public function editStockItem($stockItemId)
     {
         $stockItem = $this->stockItemRepository->find($stockItemId);
-        $products = $this->productRepository->pluck();
+        $products = $this->productRepository->pluck(['id', 'name', 'manufacturer', 'brand'], $stockItemId);
 
         return view('admin.retailers.stock.edit', compact('stockItem', 'products'));
     }

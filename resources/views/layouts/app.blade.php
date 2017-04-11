@@ -52,6 +52,7 @@
                                 <li><a href="{{ route('admin.clients.index') }}">Clientes</a></li>
                                 <li><a href="{{ route('admin.retailers.index') }}">Distribuidores</a></li>
                                 <li><a href="{{ route('admin.orders.index') }}">Pedidos</a></li>
+                                <li><a href="{{ route('admin.unregisteredorders.index') }}">Pedidos (Sem cadastro)</a></li>
                             @elseif(Auth::user()->role == "client")
                                 <li><a href="{{ route('customer.order.index') }}">Meus pedidos</a></li>
                             @elseif(Auth::user()->role == "retailer")

@@ -102,7 +102,7 @@ $factory->define(StockItem::class, function(Faker\Generator $faker) {
     $cost_price = rand(0.01, $min_selling_price*0.9);
     $start_date = date('d-m-Y',1488412799);
     $end_date = date('d-m-Y',1514764799);
-
+    
     return [
         'product_id' => random_int(1, 200),
         'retailer_id' => 1,

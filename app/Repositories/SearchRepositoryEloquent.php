@@ -2,23 +2,18 @@
 
 namespace Drinking\Repositories;
 
-use Lcobucci\JWT\Signer\Key;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Drinking\Repositories\ProductRepository;
-use Drinking\Models\Product;
+use Drinking\Repositories\SearchRepository;
+use Drinking\Models\Search;
+use Drinking\Validators\SearchValidator;
 
 /**
- * Class ProductRepositoryEloquent
+ * Class SearchRepositoryEloquent
  * @package namespace Drinking\Repositories;
  */
-class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
+class SearchRepositoryEloquent extends BaseRepository implements SearchRepository
 {
-    public function pluck($column, $key = null)
-    {
-        return $this->model->get(['id', 'name', 'manufacturer','brand']);
-    }
-
     /**
      * Specify Model class name
      *
@@ -26,7 +21,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
      */
     public function model()
     {
-        return Product::class;
+        return Search::class;
     }
 
     

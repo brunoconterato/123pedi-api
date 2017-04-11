@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <a href="{{ route('admin.petshops.stock.index', ['id'=>$petShopId]) }}" class="btn btn-default btn-small">
+        <a href="{{ route('admin.retailers.stock.index', ['id'=>$retailerId]) }}" class="btn btn-default btn-small">
             Retornar
         </a>
 
@@ -10,9 +10,9 @@
 
         @include('errors._check')
 
-        {!! Form::open(['route'=> ['retailers', 'petshopId'=>$petShopId], 'class'=>'form']) !!}
+        {!! Form::open(['route'=> ['admin.retailers.stock.store', 'retailerId'=>$retailerId], 'class'=>'form']) !!}
 
-        @include('petshop.stock._form')
+        @include('admin.retailers.stock._form')
 
         <div class="form-group">
             {!! Form::submit('Criar item de estoque', ['class'=>'btn btn-primary']) !!}

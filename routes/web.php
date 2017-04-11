@@ -66,6 +66,22 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
         Route::get('stocksearch', 'API\Search\StockSearchController@index');
     });
+
+    Route::group(['prefix' => 'information', 'as' => 'information.'], function(){
+        Route::resource('search_term',
+            'API\Information\SearchGetterController', [
+                'except' => [
+                    'index', 'create','edit','update','destroy', 'show'
+                ]
+            ]);
+
+        Route::resource('cart_item',
+            'API\Information\CartItemGetterController', [
+                'except' => [
+                    'index', 'create','edit','update','destroy', 'show'
+                ]
+            ]);
+    });
 });
 
 Route::group(['prefix'=>'retailer', 'middleware'=>'auth', 'as'=>'retailer.'], function(){
@@ -141,4 +157,11 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin', 'as'=>'ad
     Route::get('orders/{id}', ['as'=>'orders.edit', 'uses'=>'Admin\OrdersController@edit']);
     Route::post('orders/update/{id}', ['as'=>'orders.update','uses'=>'Admin\OrdersController@update']);
     Route::get('orders/deleteImage/{id}', ['as'=>'orders.deleteImage','uses'=>'Admin\OrdersController@deleteImage']);
+
+    Route::get('unregisteredorders', ['as'=>'unregisteredorders.index', 'uses'=>'Admin\UnregisteredOrdersController@index']);
+    Route::get('unregisteredorder/create', ['as'=>'unregisteredorders.create', 'uses'=> 'Admin\UnregisteredOrdersController@create']);
+    Route::post('unregisteredorder/store', ['as'=>'unregisteredorders.store', 'uses'=> 'Admin\UnregisteredOrdersController@store']);
+    Route::get('unregisteredorders/{id}', ['as'=>'unregisteredorders.edit', 'uses'=>'Admin\UnregisteredOrdersController@edit']);
+    Route::post('unregisteredorders/update/{id}', ['as'=>'unregisteredorders.update','uses'=>'Admin\UnregisteredOrdersController@update']);
+    Route::get('unregisteredorders/deleteImage/{id}', ['as'=>'unregisteredorders.deleteImage','uses'=>'Admin\UnregisteredOrdersController@deleteImage']);
 });
