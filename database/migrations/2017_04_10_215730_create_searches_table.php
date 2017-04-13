@@ -17,7 +17,7 @@ class CreateSearchesTable extends Migration
             $table->increments('id');
 
 			$table->string('search_term');
-			$table->string('latutude')->default('none');
+			$table->string('latitude')->default('none');
 			$table->string('longitude')->default('none');
 
             $table->timestamps();

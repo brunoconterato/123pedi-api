@@ -81,13 +81,22 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
                     'index', 'create','edit','update','destroy', 'show'
                 ]
             ]);
+
+        Route::resource('user_message',
+            'API\Information\UserMessageGetterController', [
+                'except' => [
+                    'index', 'create','edit','update','destroy', 'show'
+                ]
+            ]);
     });
 });
 
 Route::group(['prefix'=>'retailer', 'middleware'=>'auth', 'as'=>'retailer.'], function(){
-    Route::get('order', ['as'=>'order.index', 'uses'=> 'RetailerOrdersController@index']);
-    Route::get('order/vieworder/{id}', ['as'=>'order.vieworder', 'uses'=> 'RetailerOrdersController@viewOrder']);
-    Route::post('order/update/{id}', ['as'=>'order.update', 'uses'=> 'RetailerOrdersController@update']);
+
+    //TODO: Verificar se estas 3 rotas comentadas estão problemáticas
+//    Route::get('order', ['as'=>'order.index', 'uses'=> 'RetailerOrdersController@index']);
+//    Route::get('order/vieworder/{id}', ['as'=>'order.vieworder', 'uses'=> 'RetailerOrdersController@viewOrder']);
+//    Route::post('order/update/{id}', ['as'=>'order.update', 'uses'=> 'RetailerOrdersController@update']);
 
     Route::get('stock/index', ['as'=>'stock.index', 'uses'=> 'retailer\StockController@index']);
     Route::get('stock/create', ['as'=>'stock.create', 'uses'=> 'retailer\StockController@create']);

@@ -82,5 +82,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Drinking\Repositories\CartItemGetterRepository',
             'Drinking\Repositories\CartItemGetterRepositoryEloquent'
         );
+
+        $this->app->bind(
+            'Drinking\Repositories\UserMessageGetterRepository',
+            'Drinking\Repositories\UserMessageGetterRepositoryEloquent'
+        );
     }
 }

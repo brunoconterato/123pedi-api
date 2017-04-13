@@ -20,7 +20,7 @@ class CreateCartItemGettersTable extends Migration
 			$table->foreign('stock_item_id')->references('id')->on('stock_items');
 
 			$table->integer('quantity');
-			$table->string('latutude')->default('none');
+			$table->string('latitude')->default('none');
 			$table->string('longitude')->default('none');
 			
             $table->timestamps();
