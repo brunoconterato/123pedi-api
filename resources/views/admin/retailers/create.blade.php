@@ -2,20 +2,20 @@
 
 @section('content')
     <div class="container">
-        <a href="{{ route('admin.petshops.index') }}" class="btn btn-default btn-small">
+        <a href="{{ route('admin.retailers.index') }}" class="btn btn-default btn-small">
             Retornar
         </a>
 
-        <h3>Novo Pet Shop</h3>
+        <h3>Novo Distribuidor</h3>
 
         @include('errors._check')
 
-        {!! Form::open(['route'=>'retailers', 'class'=>'form']) !!}
+        {!! Form::open(['route'=>'admin.retailers.store', 'class'=>'form']) !!}
 
         @include('admin.retailers._form')
 
         <div class="form-group">
-            {!! Form::submit('Criar Pet Shop', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Criar Retailer', ['class'=>'btn btn-primary']) !!}
         </div>
 
         {!! Form::close() !!}
