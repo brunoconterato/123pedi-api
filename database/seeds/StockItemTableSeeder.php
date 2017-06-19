@@ -45,20 +45,22 @@ class StockItemTableSeeder extends Seeder
         //Não consegui acessar os products
         foreach ($products as $product) {
             $retailers = 3;
-            $price = rand(0.01,100.0);
-            $min_selling_price = rand(0.01, $price);
-            $cost_price = rand(0.01, $min_selling_price*0.9);
 
-            for ($i=1; $i<=3; $i++)
-            factory(StockItem::class)->create([
-                'product_id' => $product->id,
-                'retailer_id' => i,
-                'quantity' => random_int(88888, 99999),
-                'price' => $price,
-                'min_selling_price' => $min_selling_price,
-                'cost_price' => $cost_price,
-                'expiration_date' => $faker->dateTimeBetween($start_date, $end_date),
-            ]);
+            for ($i=1; $i<=$retailers; $i++) {
+                $price = rand(0.01,100.0);
+                $min_selling_price = rand(0.01, $price);
+                $cost_price = rand(0.01, $min_selling_price*0.9);
+
+                factory(StockItem::class)->create([
+                    'product_id' => $product->id,
+                    'retailer_id' => $i,
+                    'quantity' => random_int(88888, 99999),
+                    'price' => $price,
+                    'min_selling_price' => $min_selling_price,
+                    'cost_price' => $cost_price,
+                    'expiration_date' => $faker->dateTimeBetween($start_date, $end_date),
+                ]);
+            }
         }
 
     }

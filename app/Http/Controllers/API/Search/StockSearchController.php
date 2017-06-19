@@ -24,7 +24,7 @@ class StockSearchController extends Controller
         $stockItems = $this->stockItemRepository->with(['retailer', 'product', 'product.category'])->scopeQuery(function ($query) use ($retailerId) {
             return $query->where('retailer_id','=',$retailerId);
         })->all();
-
+        
         //TODO: retirar replicações
 
         return $stockItems;

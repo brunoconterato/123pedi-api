@@ -19,10 +19,10 @@ class UnregisteredOrderItem extends Model implements Transformable
     public function stockItem()
     {
         return $this->belongsTo(StockItem::class);
+//        return $this->hasOne(StockItem::class);
     }
 
-    //TODO: Corrigir: cada orderItem eh um produco
-    public function product(){
-        return $this->hasMany(Product::class);
+    public function order(){
+        return $this->belongsTo(UnregisteredOrder::class);
     }
 }

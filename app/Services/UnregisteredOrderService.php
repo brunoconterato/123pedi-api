@@ -70,7 +70,7 @@ class UnregisteredOrderService
                 $this->stockItemRepository->update($stockItems[$i]->toArray(), $stockItems[$i]->id);
             }
 
-            //data to create order
+            //data to create orders
             $dataOrder['status'] = 'Pendente';
             $dataOrder['total'] = $total;
             $dataOrder['retailer_id'] = $data['retailer_id'];

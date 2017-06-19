@@ -30,22 +30,22 @@
                                 <li>{{$orderItem->stockItem->product->name}}</li>
                             @endforeach
                         </ul>
-                    </td>
-                    <td>{{$order->status}}</td>
-                    <td>
-                        @if($order->retailer)
-                            {{$order->retailer->user->name}}
-                        @else
-                            --
-                        @endif
-                    </td>
+                    {{--</td>--}}
+                    {{--<td>{{$order->status}}</td>--}}
+                    {{--<td>--}}
+                        {{--@if($order->retailer)--}}
+                            {{--{{$order->retailer->user->name}}--}}
+                        {{--@else--}}
+                            {{------}}
+                        {{--@endif--}}
+                    {{--</td>--}}
 
-                    <td>
-                        <a href="{{route('admin.unregisteredorders.edit', ['id'=>$order->id])}}" class="btn btn-warning btn-small">
-                            <i class = "glyphicon glyphicon-eye-open"></i>
-                        </a>
-                    </td>
-                </tr>
+                    {{--<td>--}}
+                        {{--<a href="{{route('admin.unregisteredorders.edit', ['id'=>$order->id])}}" class="btn btn-warning btn-small">--}}
+                            {{--<i class = "glyphicon glyphicon-eye-open"></i>--}}
+                        {{--</a>--}}
+                    {{--</td>--}}
+                {{--</tr>--}}
             @endforeach
             </tbody>
 

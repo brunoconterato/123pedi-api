@@ -58,7 +58,7 @@ class UnregisteredOrdersController extends Controller
 
     public function index()
     {
-        $orders = $this->orderRepository->paginate();
+        $orders = $this->orderRepository->paginate('15', array('*'));
         return view('admin.unregisteredorders.index', compact('orders'));
     }
 

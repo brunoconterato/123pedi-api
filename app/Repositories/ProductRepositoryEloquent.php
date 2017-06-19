@@ -14,7 +14,7 @@ use Drinking\Models\Product;
  */
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
 {
-    public function pluck($column, $key = null)
+    public function pluck($column = null, $key = null)
     {
         return $this->model->get(['id', 'name', 'manufacturer','brand']);
     }

@@ -54,10 +54,10 @@
                                 <li><a href="{{ route('admin.orders.index') }}">Pedidos</a></li>
                                 <li><a href="{{ route('admin.unregisteredorders.index') }}">Pedidos (Sem cadastro)</a></li>
                             @elseif(Auth::user()->role == "client")
-                                <li><a href="{{ route('customer.order.index') }}">Meus pedidos</a></li>
+                                <li><a href="{{ route('orders') }}">Meus pedidos</a></li>
                             @elseif(Auth::user()->role == "retailer")
                                 <li><a href="{{ route('retailer.stock.index') }}">Estoque</a></li>
-                                <li><a href="{{ route('retailer.order.index') }}">Meus pedidos</a></li>
+                                <li><a href="{{ route('retailer.orders.index') }}">Meus pedidos</a></li>
                             @endif
                         @endif
                     </ul>

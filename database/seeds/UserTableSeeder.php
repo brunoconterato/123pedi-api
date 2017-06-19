@@ -26,15 +26,15 @@ class UserTableSeeder extends Seeder
 
         print "\nCriou User";
 
-        factory(User::class)->create([
-            'name' => 'User2',
-            'role' => 'client',
-            'email' => 'user2@user.com',
-            'password' => bcrypt(789456),
-            'remember_token' => str_random(10),
-        ])->client()->save(factory(Client::class)->make());
-
-        print "\nCriou User2";
+//        factory(User::class)->create([
+//            'name' => 'User2',
+//            'role' => 'client',
+//            'email' => 'user2@user.com',
+//            'password' => bcrypt(789456),
+//            'remember_token' => str_random(10),
+//        ])->client()->save(factory(Client::class)->make());
+//
+//        print "\nCriou User2";
 
         factory(User::class)->create([
             'name' => 'Admin',
@@ -54,28 +54,38 @@ class UserTableSeeder extends Seeder
             'remember_token' => str_random(10),
         ])->retailer()->save(factory(Retailer::class)->make());
 
-        print "\nCriou retailer";
+        print "\nCriou retailer 1";
 
-//        factory(User::class)->create([
-//            'name' => 'retailer2',
-//            'role' => 'retailer',
-//            'email' => 'retailer2@user.com',
-//            'password' => bcrypt(789456),
-//            'remember_token' => str_random(10),
-//        ])->retailer()->save(factory(Retailer::class)->make());
-//
-//        print "\nCriou retailer2";
-//
+        factory(User::class)->create([
+            'name' => 'retailer2',
+            'role' => 'retailer',
+            'email' => 'retailer2@user.com',
+            'password' => bcrypt(789456),
+            'remember_token' => str_random(10),
+        ])->retailer()->save(factory(Retailer::class)->make());
+
+        print "\nCriou retailer 2";
+
+        factory(User::class)->create([
+            'name' => 'retailer3',
+            'role' => 'retailer',
+            'email' => 'retailer3@user.com',
+            'password' => bcrypt(789456),
+            'remember_token' => str_random(10),
+        ])->retailer()->save(factory(Retailer::class)->make());
+
+        print "\nCriou retailer 3";
+
 //        factory(User::class, 1)->create([
 //            'role'=>'retailer'
 //        ])->each(function($u){
 //            $u->retailer()->save(factory(Retailer::class)->make());
 //        });
 
-        factory(User::class, 10) ->create([
-            'role'=>'client'
-        ])->each(function($u){
-            $u->client()->save(factory(Client::class)->make());
-        });
+//        factory(User::class, 10) ->create([
+//            'role'=>'client'
+//        ])->each(function($u){
+//            $u->client()->save(factory(Client::class)->make());
+//        });
     }
 }

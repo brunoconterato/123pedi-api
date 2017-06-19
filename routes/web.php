@@ -35,7 +35,7 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
                 ]
             ]);
 
-        Route::patch('order/{id}/update_status', [
+        Route::patch('orders/{id}/update_status', [
             'uses'=> 'API\Retailer\RetailerOrdersController@updateStatus',
             'as'=> 'orders.update_status'
         ]);
@@ -49,7 +49,7 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
                 ]
             ]);
         
-        Route::patch('/order/{orderId}/cancel_order', 'API\Customer\CustomerOrdersController@cancelOrder');
+        Route::patch('/orders/{orderId}/cancel_order', 'API\Customer\CustomerOrdersController@cancelOrder');
     });
 
     Route::group(['prefix'=>'unregistered', 'as'=>'unregistered.'], function(){
@@ -60,7 +60,7 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
                 ]
             ]);
 
-        Route::patch('/order/{orderId}/cancel_order', 'API\Unregistered\UnregisteredCustomerOrdersController@cancelOrder');
+        Route::patch('/orders/{orderId}/cancel_order', 'API\Unregistered\UnregisteredCustomerOrdersController@cancelOrder');
     });
 
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
@@ -94,16 +94,16 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
 Route::group(['prefix'=>'retailer', 'middleware'=>'auth', 'as'=>'retailer.'], function(){
 
     //TODO: Verificar se estas 3 rotas comentadas estão problemáticas
-//    Route::get('order', ['as'=>'order.index', 'uses'=> 'RetailerOrdersController@index']);
-//    Route::get('order/vieworder/{id}', ['as'=>'order.vieworder', 'uses'=> 'RetailerOrdersController@viewOrder']);
-//    Route::post('order/update/{id}', ['as'=>'order.update', 'uses'=> 'RetailerOrdersController@update']);
+    Route::get('orders', ['as'=>'orders.index', 'uses'=> 'Retailer\RetailerOrdersController@index']);
+    Route::get('orders/vieworder/{id}', ['as'=>'orders.vieworder', 'uses'=> 'Retailer\RetailerOrdersController@viewOrder']);
+    Route::post('orders/update/{id}', ['as'=>'orders.update', 'uses'=> 'Retailer\RetailerOrdersController@update']);
 
-    Route::get('stock/index', ['as'=>'stock.index', 'uses'=> 'retailer\StockController@index']);
-    Route::get('stock/create', ['as'=>'stock.create', 'uses'=> 'retailer\StockController@create']);
-    Route::post('stock/store', ['as'=>'stock.store','uses'=>'retailer\StockController@store']);
-    Route::get('stock/edit/{id}', ['as'=>'stock.edit', 'uses'=> 'retailer\StockController@edit']);
-    Route::post('stock/update/{id}', ['as'=>'stock.update','uses'=>'retailer\StockController@update']);
-    Route::get('stock/destroy/{id}', ['as'=>'stock.destroy', 'uses'=>'retailer\StockController@destroy']);
+    Route::get('stock/index', ['as'=>'stock.index', 'uses'=> 'Retailer\StockController@index']);
+    Route::get('stock/create', ['as'=>'stock.create', 'uses'=> 'Retailer\StockController@create']);
+    Route::post('stock/store', ['as'=>'stock.store','uses'=>'Retailer\StockController@store']);
+    Route::get('stock/edit/{id}', ['as'=>'stock.edit', 'uses'=> 'Retailer\StockController@edit']);
+    Route::post('stock/update/{id}', ['as'=>'stock.update','uses'=>'Retailer\StockController@update']);
+    Route::get('stock/destroy/{id}', ['as'=>'stock.destroy', 'uses'=>'Retailer\StockController@destroy']);
 });
 
 Auth::routes();
@@ -161,8 +161,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin', 'as'=>'ad
     Route::get('products/deleteImage/{id}', ['as'=>'products.deleteImage','uses'=>'Admin\ProductsController@deleteImage']);
 
     Route::get('orders', ['as'=>'orders.index', 'uses'=>'Admin\OrdersController@index']);
-    Route::get('order/create', ['as'=>'orders.create', 'uses'=> 'Admin\OrdersController@create']);
-    Route::post('order/store', ['as'=>'orders.store', 'uses'=> 'Admin\OrdersController@store']);
+    Route::get('orders/create', ['as'=>'orders.create', 'uses'=> 'Admin\OrdersController@create']);
+    Route::post('orders/store', ['as'=>'orders.store', 'uses'=> 'Admin\OrdersController@store']);
     Route::get('orders/{id}', ['as'=>'orders.edit', 'uses'=>'Admin\OrdersController@edit']);
     Route::post('orders/update/{id}', ['as'=>'orders.update','uses'=>'Admin\OrdersController@update']);
     Route::get('orders/deleteImage/{id}', ['as'=>'orders.deleteImage','uses'=>'Admin\OrdersController@deleteImage']);

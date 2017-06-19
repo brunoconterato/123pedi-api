@@ -14,8 +14,8 @@ class OrderTableSeeder extends Seeder
     public function run()
     {
         factory(Order::class, 500)->create()->each(function ($o) {
-            //Criando itens para order
-            //Cada order 4 itens
+            //Criando itens para orders
+            //Cada orders 4 itens
             for($i=0; $i<=4; $i++){
                 $o->items()->save(factory(OrderItem::class)->make());
             }
