@@ -15,9 +15,6 @@ class StockItem extends Model implements Transformable
         'retailer_id',
         'quantity',
         'price',
-        'min_selling_price',
-        'cost_price',
-        'expiration_date'
     ];
 
     public function product(){

@@ -18,18 +18,19 @@ class CreateUnregisteredOrdersTable extends Migration
 
             $table->string('name');
             $table->string('phone');
-            $table->string('street_adress');
-            $table->string('adress_line_2');
+            $table->string('email');
+            $table->string('street_address');
+            $table->string('address_line_2');
             $table->string('neighborhood');
             $table->string('city');
             $table->string('state');
             $table->string('zipcode');
-            $table->string('email');
 
             $table->decimal('lat_coordinate');
             $table->decimal('long_coordinate');
 
-            $table->integer('retailer_id');
+            $table->integer('retailer_id')->unsigned();
+            $table->foreign('retailer_id')->references('id')->on('retailers');
 
             $table->decimal('total')->default(0);
             $table->string('status')->default("Pendente");

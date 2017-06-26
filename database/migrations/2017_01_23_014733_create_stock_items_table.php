@@ -20,14 +20,11 @@ class CreateStockItemsTable extends Migration
 			$table->foreign('product_id')->references('id')->on('products');
 
 			$table->integer('retailer_id')->unsigned();
-			$table->foreign('retailer_id')->references('id')->on('retailer');
+			$table->foreign('retailer_id')->references('id')->on('retailers');
 
 			$table->integer('quantity');
-			$table->date('expiration_date');
 
 			$table->decimal('price');
-			$table->decimal('min_selling_price')->default(0);
-			$table->decimal('cost_price')->default(0);
 
 			$table->timestamps();
 		});

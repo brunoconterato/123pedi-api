@@ -13,13 +13,13 @@ class UnregisteredOrder extends Model implements Transformable
     protected $fillable = [
         'name',
         'phone',
-        'street_adress',
-        'adress_line_2',
+        'email',
+        'street_address',
+        'address_line_2',
         'neighborhood',
         'city',
         'state',
         'zipcode',
-        'email',
         'lat_coordinate',
         'long_coordinate',
 

@@ -98,19 +98,12 @@ $factory->define(Category::class, function(Faker\Generator $faker) {
 
 $factory->define(StockItem::class, function(Faker\Generator $faker) {
     $price = rand(0.01,100.0);
-    $min_selling_price = rand(0.01, $price);
-    $cost_price = rand(0.01, $min_selling_price*0.9);
-    $start_date = date('d-m-Y',1488412799);
-    $end_date = date('d-m-Y',1514764799);
     
     return [
         'product_id' => random_int(1, 200),
         'retailer_id' => 1,
         'quantity' => random_int(8888,9999),
         'price' => $price,
-        'min_selling_price' => $min_selling_price,
-        'cost_price' => $cost_price,
-        'expiration_date' => $faker->dateTimeBetween($start_date,$end_date),
    ];
 });
 
@@ -122,13 +115,14 @@ $factory->define(UnregisteredOrder::class, function(Faker\Generator $faker){
 
         'name' => $faker->name,
         'phone' => $faker->phoneNumber,
-        'street_adress' => $faker->address,
-        'adress_line_2' => random_int(1,1000),
+        'email' => $faker->email,
+        'street_address' => $faker->address,
+        'address_line_2' => random_int(1,1000),
         'neighborhood' => $faker->word,
         'city' => $faker->city,
         'state' => $faker->state,
+        'state' => $faker->state,
         'zipcode' => $faker->postcode,
-        'email' => $faker->email,
         'lat_coordinate' => $faker->latitude,
         'long_coordinate' => $faker->longitude,
     ];

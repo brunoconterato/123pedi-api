@@ -13,8 +13,6 @@ class OrderItem extends Model implements Transformable
     protected $fillable = [
         'stock_item_id',
         'order_id',
-        //TODO: retirar o price, que virá do stockItem
-        'price',
         'quantity'
     ];
 

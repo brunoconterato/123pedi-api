@@ -11,7 +11,7 @@
         <h4>Data: {{$order->created_at}}</h4>
         <p>
             <b>Entregar em:</b><br>
-            {{$order->street_adress}} - {{$order->adress_line_2}} - {{$order->city}} - {{$order->state}}
+            {{$order->street_address}} - {{$order->address_line_2}} - {{$order->city}} - {{$order->state}}
         </p>
 
         {!! Form::model($order, ['route' => ['admin.unregisteredorders.update', $order->id], 'method' => 'POST']) !!}

@@ -14,7 +14,7 @@
 
         <p>
             <b>Entregar em:</b><br>
-            {{$order->street_adress}} - {{$order->city}} - {{$order->state}}
+            {{$order->street_address}} - {{$order->city}} - {{$order->state}}
         </p>
 
         <b>Produtos:</b><br>
@@ -34,7 +34,7 @@
                 <td>{{$item->stockItem->product->name}}</td>
                 <td>{{$item->stockItem->price}}</td>
                 <td>{{$item->quantity}}</td>
-                <td>{{$item->price * $item->quantity}}</td>
+                <td>{{$item->stockItem->price * $item->quantity}}</td>
             </tr>
             @endforeach
             </tbody>

@@ -60,10 +60,11 @@ class OrderService
 
                 $stockItemId = $orderItemsData[$i]['stock_item_id'];
                 $stockItems[$i] = $this->stockItemRepository->find($stockItemId);
-                $orderItemsData[$i]['price'] = $stockItems[$i]->price;
+//                $orderItemsData[$i]['price'] = $stockItems[$i]->price;
 
                 //updating total
-                $total += $orderItemsData[$i]['price']*$orderItemsData[$i]['quantity'];
+//                $total += $orderItemsData[$i]['price']*$orderItemsData[$i]['quantity'];
+                $total += $stockItems[$i]->price*$orderItemsData[$i]['quantity'];
 
                 //Decrementing stockItem envolvido na transaction
                 $stockItems[$i]->quantity = $stockItems[$i]->quantity - $orderItemsData[$i]['quantity'];
