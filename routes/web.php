@@ -63,8 +63,14 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
         Route::patch('/orders/{orderId}/cancel_order', 'API\Unregistered\UnregisteredCustomerOrdersController@cancelOrder');
     });
 
-    Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
-        Route::get('stocksearch', 'API\Search\StockSearchController@index');
+    Route::group(['prefix' => 'seed', 'as' => 'seed.'], function () {
+        Route::get('stock', 'API\Search\StockSearchController@index');
+
+        Route::get('products','API\Search\ProductsSeedController@index');
+
+        Route::get('retailers','API\Search\RetailersSeedController@index');
+
+        Route::get('categories','API\Search\CategoriesSeedController@index');
     });
 
     Route::group(['prefix' => 'information', 'as' => 'information.'], function(){
