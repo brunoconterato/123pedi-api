@@ -56,8 +56,8 @@ class Seed extends Controller
                 $retailer['name'] = $retailer->user->name;
                 unset($retailer['user']);
 
-                //TODO: fazer os retailers não retornarem os items
-                //Esta linha não funciona:
+                //TODO: fazer os retailers n達o retornarem os items
+                //Esta linha n達o funciona:
                 unset($retailer->items);
 
                 $nearRetailers[] = $retailer;
@@ -87,11 +87,8 @@ class Seed extends Controller
         /*
          * Getting Categories
          */
-        $categories = [];
-        foreach($products as $product)
-            $categories[] = $product->category;
-        $categories = array_unique($categories);
+        $categories = $this->categoryRepository->all();
 
-        return array('retailers' => $nearRetailers, 'products' => $products, 'categories' => $categories, 'stockItems' => $stockItems);
+        return array('retailers' => $nearRetailers, 'products' => $products, 'categories' => $categories, 'items' => $stockItems);
     }
 }
