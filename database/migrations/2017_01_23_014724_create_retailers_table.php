@@ -26,6 +26,12 @@ class CreateRetailersTable extends Migration
 			$table->string('city');
 			$table->string('state');
 			$table->string('zipcode');
+
+			$table->double('latitude');
+			$table->double('longitude');
+
+			$table->smallInteger('delivery_radius');
+
 			$table->timestamps();
 		});
 	}

@@ -51,7 +51,12 @@ $factory->define(Retailer::class, function (Faker\Generator $faker) {
         'address' => $faker->address,
         'city' =>$faker->city,
         'state' => $faker->state,
-        'zipcode' => $faker->postcode
+        'zipcode' => $faker->postcode,
+
+        'latitude' => $faker->latitude,
+        'longitude' => $faker->longitude,
+
+        'delivery_radius' => random_int(1,5) * 1000,
     ];
 });
 

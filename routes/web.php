@@ -11,6 +11,9 @@
 |
 */
 
+use Drinking\Models\Retailer;
+use Drinking\Repositories\RetailerRepositoryEloquent;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -71,6 +74,8 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
         Route::get('retailers','API\Search\RetailersSeedController@index');
 
         Route::get('categories','API\Search\CategoriesSeedController@index');
+
+        Route::post('all','API\Search\Seed@index');
     });
 
     Route::group(['prefix' => 'information', 'as' => 'information.'], function(){
@@ -94,6 +99,15 @@ Route::group(['prefix'=>'api', 'as'=>'api.'], function(){
                     'index', 'create','edit','update','destroy', 'show'
                 ]
             ]);
+    });
+
+    Route::group(['prefix'=>'test', 'as'=>'test.'], function(){
+        Route::get('distance', function(RetailerRepositoryEloquent $retailerRepository){
+            $retailer = $retailerRepository->find(1);
+
+            return vincentyGreatCircleDistance(
+                -16.718403,  -49.268936, $retailer->latitude, $retailer->longitude);
+        });
     });
 });
 
@@ -180,3 +194,31 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin', 'as'=>'ad
     Route::post('unregisteredorders/update/{id}', ['as'=>'unregisteredorders.update','uses'=>'Admin\UnregisteredOrdersController@update']);
     Route::get('unregisteredorders/deleteImage/{id}', ['as'=>'unregisteredorders.deleteImage','uses'=>'Admin\UnregisteredOrdersController@deleteImage']);
 });
+
+/**
+ * Calculates the great-circle distance between two points, with
+ * the Vincenty formula.
+ * @param float $latitudeFrom Latitude of start point in [deg decimal]
+ * @param float $longitudeFrom Longitude of start point in [deg decimal]
+ * @param float $latitudeTo Latitude of target point in [deg decimal]
+ * @param float $longitudeTo Longitude of target point in [deg decimal]
+ * @param float $earthRadius Mean earth radius in [m]
+ * @return float Distance between points in [m] (same as earthRadius)
+ */
+function vincentyGreatCircleDistance(
+    $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
+{
+    // convert from degrees to radians
+    $latFrom = deg2rad($latitudeFrom);
+    $lonFrom = deg2rad($longitudeFrom);
+    $latTo = deg2rad($latitudeTo);
+    $lonTo = deg2rad($longitudeTo);
+
+    $lonDelta = $lonTo - $lonFrom;
+    $a = pow(cos($latTo) * sin($lonDelta), 2) +
+        pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
+    $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
+
+    $angle = atan2(sqrt($a), $b);
+    return $angle * $earthRadius;
+}
