@@ -26,8 +26,8 @@ class CreateUnregisteredOrdersTable extends Migration
             $table->string('state');
             $table->string('zipcode');
 
-            $table->decimal('lat_coordinate');
-            $table->decimal('long_coordinate');
+            $table->double('lat_coordinate');
+            $table->double('long_coordinate');
 
             $table->integer('retailer_id')->unsigned();
             $table->foreign('retailer_id')->references('id')->on('retailers');
