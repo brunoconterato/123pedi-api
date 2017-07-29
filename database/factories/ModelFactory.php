@@ -14,6 +14,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Drinking\Models\Category;
 use Drinking\Models\Client;
+use Drinking\Models\OpenInterval;
 use Drinking\Models\Order;
 use Drinking\Models\OrderItem;
 use Drinking\Models\Product;
@@ -138,6 +139,21 @@ $factory->define(UnregisteredOrderItem::class, function(Faker\Generator $faker){
         'quantity' => random_int(1,10),
         'unregistered_order_id' => random_int(1, 2000),
         'stock_item_id' => random_int(1, 200)
+    ];
+});
+
+$factory->define(OpenInterval::class, function(Faker\Generator $faker){
+    $openTimeSec = rand(1,86400);
+    $closeTimeSec = rand($openTimeSec,86400);
+
+    $openTime = date('H:i:s', $openTimeSec);
+    $closeTime = date('H:i:s', $closeTimeSec);
+
+    return[
+        'retailer_id' => random_int(1,5),
+        'day_of_week' => random_int(0,6),
+        'open_time' => $openTime,
+        "close_time" => $closeTime
     ];
 });
 

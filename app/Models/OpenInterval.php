@@ -13,8 +13,8 @@ class OpenInterval extends Model implements Transformable
     protected $fillable = [
         'retailer_id',
         'day_of_week',
-        'start_time',
-        "end_time"
+        'open_time',
+        "close_time"
     ];
 
 }
