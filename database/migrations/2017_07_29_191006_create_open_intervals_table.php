@@ -21,8 +21,8 @@ class CreateOpenIntervalsTable extends Migration
 
 			$table->unsignedSmallInteger('day_of_week')->unsigned();  //De 1 (Segunda) a 7(Domingo) ???
 
-			$table->time('start_time');
-        	$table->time('end_time');
+			$table->time('open_time');
+        	$table->time('close_time');
 
             $table->timestamps();
 		});
