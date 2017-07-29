@@ -52,7 +52,10 @@ class UserTableSeeder extends Seeder
             'email' => 'retailer@user.com',
             'password' => bcrypt(789456),
             'remember_token' => str_random(10),
-        ])->retailer()->save(factory(Retailer::class)->make(['latitude' => -16.68689, 'longitude' => -49.26479,]));
+        ])->retailer()->save(factory(Retailer::class)->make([
+            'latitude' => -16.68689,
+            'longitude' => -49.26479,
+        ]));
 
         print "\nCriou retailer 1";
 
@@ -79,6 +82,30 @@ class UserTableSeeder extends Seeder
             'longitude' => -49.27857,]));
 
         print "\nCriou retailer 3";
+
+        factory(User::class)->create([
+            'name' => 'Distribuidora Tia Luciana Noite',
+            'role' => 'retailer',
+            'email' => 'retailer4@user.com',
+            'password' => bcrypt(789456),
+            'remember_token' => str_random(10),
+        ])->retailer()->save(factory(Retailer::class)->make([
+            'latitude' => -18.9162,
+            'longitude' => -48.31545,]));
+
+        print "\nCriou retailer 4";
+
+        factory(User::class)->create([
+            'name' => 'Distribuidora Tia Luciana Dia',
+            'role' => 'retailer',
+            'email' => 'retailer5@user.com',
+            'password' => bcrypt(789456),
+            'remember_token' => str_random(10),
+        ])->retailer()->save(factory(Retailer::class)->make([
+            'latitude' => -18.91458,
+            'longitude' => -48.316,]));
+
+        print "\nCriou retailer 5";
 
 //        factory(User::class, 1)->create([
 //            'role'=>'retailer'

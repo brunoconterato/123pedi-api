@@ -25,4 +25,6 @@ return [
 
     'minutes_for_user_cancel_order' => env('MINUTES_FOR_USER_CANCEL_ORDER','5'),
 
+    'minutes_for_cart_drop_items' => env('MINUTES_FOR_CART_DROP_ITEMS','15'),
+
 ];

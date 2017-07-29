@@ -151,7 +151,7 @@ $factory->define(OpenInterval::class, function(Faker\Generator $faker){
 
     return[
         'retailer_id' => random_int(1,5),
-        'day_of_week' => random_int(0,6),
+        'day_of_week' => random_int(1,7),
         'open_time' => $openTime,
         "close_time" => $closeTime
     ];

@@ -6,7 +6,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Drinking\Repositories\RetailerRepository;
 use Drinking\Models\Retailer;
-use Drinking\Validators\RetailerValidator;
 
 /**
  * Class RetailerRepositoryEloquent

@@ -24,7 +24,7 @@ class OpenIntervalTableSeeder extends Seeder
     public function run()
     {
         foreach($this->retailerRepository->all() as $retailer){
-            for($i = 0; $i<7; $i++){
+            for($i = 1; $i<=7; $i++){
 
                 $openTimeSec = rand(1,86400);
                 $closeTimeSec = rand($openTimeSec,86400);

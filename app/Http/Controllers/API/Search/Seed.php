@@ -2,8 +2,10 @@
 
 namespace Drinking\Http\Controllers\API\Search;
 
+use Carbon\Carbon;
 use Drinking\Http\Controllers\Controller;
 use Drinking\Repositories\CategoryRepository;
+use Drinking\Repositories\OpenIntervalRepository;
 use Drinking\Repositories\ProductRepository;
 use Drinking\Repositories\RetailerRepository;
 use Drinking\Repositories\StockItemRepository;
@@ -27,17 +29,23 @@ class Seed extends Controller
      * @var CategoryRepository
      */
     private $categoryRepository;
+    /**
+     * @var OpenIntervalRepository
+     */
+    private $openIntervalRepository;
 
     public function __construct(
         RetailerRepository $retailerRepository,
         ProductRepository $productRepository,
         CategoryRepository $categoryRepository,
-        StockItemRepository $stockItemRepository)
+        StockItemRepository $stockItemRepository,
+        OpenIntervalRepository $openIntervalRepository)
     {
         $this->retailerRepository = $retailerRepository;
         $this->productRepository = $productRepository;
         $this->stockItemRepository = $stockItemRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->openIntervalRepository = $openIntervalRepository;
     }
 
     public function index(Request $request){
@@ -64,12 +72,37 @@ class Seed extends Controller
             }
         }
 
+
+        /**
+         * Getting Opened Retailers
+         */
+        
+        $now = Carbon::now(-3);
+//        dd($now);
+
+        $nearOpenedRetailers = [];
+
+        foreach ($nearRetailers as $retailer){
+
+            $day_interval = $this->openIntervalRepository->scopeQuery(function($query) use($retailer, $now) {
+                return $query->where('retailer_id','=',$retailer->id)->where('day_of_week','=',$now->dayOfWeek);
+            })->first();
+
+            $open_time = $day_interval['open_time'];
+            $open_time_carbon = new Carbon($open_time,-3);
+
+            $close_time = $day_interval['close_time'];
+            $close_time_carbon = new Carbon($close_time,-3);
+
+            if($now->between($open_time_carbon,$close_time_carbon))
+                $nearOpenedRetailers[] = $retailer;
+        }
+
         /*
          * Getting StockItems
          */
         $stockItems = [];
-        foreach($nearRetailers as $retailer) {
-//            echo($retailer);
+        foreach($nearOpenedRetailers as $retailer) {
             foreach ($retailer->items as $stockItem)
                 $stockItems[] = $stockItem;
         }
@@ -89,6 +122,6 @@ class Seed extends Controller
          */
         $categories = $this->categoryRepository->all();
 
-        return array('retailers' => $nearRetailers, 'products' => $products, 'categories' => $categories, 'items' => $stockItems);
+        return array('retailers' => $nearOpenedRetailers, 'products' => $products, 'categories' => $categories, 'items' => $stockItems);
     }
 }

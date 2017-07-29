@@ -35,6 +35,11 @@ class Retailer extends Model implements Transformable
         return $this->hasMany(StockItem::class);
     }
 
+    public function openIntervals()
+    {
+        return $this->hasMany(OpenInterval::class);
+    }
+
     public function distanceFrom($latitude, $longitude)
     {
         return $this->vincentyGreatCircleDistance(
