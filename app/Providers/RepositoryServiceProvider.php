@@ -87,5 +87,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Drinking\Repositories\UserMessageGetterRepository',
             'Drinking\Repositories\UserMessageGetterRepositoryEloquent'
         );
+
+        $this->app->bind(
+            'Drinking\Repositories\OpenIntervalRepository',
+            'Drinking\Repositories\OpenIntervalRepositoryEloquent'
+        );
     }
 }
